@@ -198,6 +198,7 @@ h2 {
 .legend i.h { background: var(--halt); }
 
 .guard { display: grid; grid-template-columns: 1.1fr 1fr; gap: 26px; align-items: start; }
+.guard > * { min-width: 0; }
 pre {
   margin: 0; background: var(--ink); color: #D8E0D6;
   padding: 20px 22px; overflow-x: auto;
@@ -250,9 +251,10 @@ pre .s { color: #E0A860; }
   section > .wrap { padding-top: 46px; padding-bottom: 46px; }
 }
 @media (max-width: 560px) {
-  .masthead .wrap { flex-wrap: wrap; gap: 10px; }
-  .kicker { border-left: none; padding-left: 0; }
-  .to-app { margin-left: 0; }
+  .masthead .wrap { align-items: center; gap: 12px; padding-top: 11px; padding-bottom: 10px; }
+  .wordmark { font-size: 20px; }
+  .kicker { display: none; }
+  .to-app { padding: 8px 14px; font-size: 13px; }
   .diagram { padding: 20px 14px 16px; }
   .swipe { display: block; }
 }
@@ -281,15 +283,15 @@ pre .s { color: #E0A860; }
 
     <div class="inbox">
       <div class="msg">
-        <p>are you open saturday</p>
+        <p>hi are you open today? i have monday off and thought id come by</p>
         <span class="verdict">answered alone</span>
       </div>
       <div class="msg">
-        <p>my mum makes amazing chutney, shes got about 40 jars she wants to donate. all home made with love</p>
+        <p>my mum makes amazing chutney and jam, shes got about 40 jars she wants to donate. all home made with love</p>
         <span class="verdict ask">brought to her</span>
       </div>
       <div class="msg">
-        <p>im 15 and i need volunteer hours for school, can i help on saturdays</p>
+        <p>Hi, I'm 14 and I really want to volunteer at the pantry — I did a food drive at school and loved it</p>
         <span class="verdict halt">never automatic</span>
       </div>
       <div class="msg">

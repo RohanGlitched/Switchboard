@@ -470,4 +470,11 @@ button:focus-visible, [tabindex]:focus-visible {
   .panel-head { display: block; }
   .panel-title { white-space: nowrap; }
   .tally { flex-wrap: wrap; }
+  /* Thirteen full cards in one column is sixteen screens of scrolling, and the
+     dial ends up buried under all of them. Give each panel its own scroll back. */
+  .scroller { max-height: 72vh; overflow-y: auto; }
+  .promo { padding: 24px 22px 22px; }
+  .promo q { font-size: 19px; }
+  .promo-acts { flex-direction: column; }
+  .promo-acts .btn { width: 100%; padding-top: 11px; padding-bottom: 11px; }
 }
