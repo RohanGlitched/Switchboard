@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Switchboard — Riverside Community Pantry</title>
+<meta name="description" content="An operations agent that runs a small food pantry's inbox and surfaces only the decisions a person has to make.">
+<link rel="stylesheet" href="/static/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%2319211D'/><circle cx='50' cy='50' r='20' fill='%23B26B00'/></svg>">
+</head>
+<body>
+<div class="shell">
+
+  <header class="masthead">
+    <h1 class="wordmark">Switchboard<span class="dot">.</span></h1>
+    <div class="org">Riverside Community Pantry — Coordinator's desk</div>
+    <div class="masthead-right">
+      <div class="engine">
+        <span class="pulse" id="pulse"></span>
+        <span id="engine-text">connecting…</span>
+      </div>
+      <button class="reset" id="reset">Clear the week</button>
+      <button class="run" id="run">Run the week</button>
+    </div>
+  </header>
+
+  <main class="board">
+
+    <!-- LEFT: what needs a human -->
+    <section class="desk">
+      <div class="panel-head">
+        <h2 class="panel-title">The Desk</h2>
+        <p class="panel-note">Everything here stopped because it needed you.</p>
+      </div>
+
+      <div class="tally">
+        <div class="tally-num zero" id="tally-num">0</div>
+        <div>
+          <div class="tally-word" id="tally-word">Nothing needs you.</div>
+          <div class="tally-sub" id="tally-sub">The week hasn't started yet.</div>
+        </div>
+      </div>
+
+      <div class="scroller" id="cards">
+        <div class="empty">
+          <h3>An empty desk is the goal.</h3>
+          <p>Switchboard reads the pantry's inbox all week. It answers what the
+             handbook already answers, books the shifts, records the donations —
+             and stops at anything that needs a person's judgment. Those land here.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT: what it did without you -->
+    <section class="works">
+      <div class="panel-head">
+        <h2 class="panel-title">What it handled</h2>
+        <p class="panel-note">Live, and on the record.</p>
+      </div>
+
+      <div class="counts">
+        <div>
+          <div class="count-num calm" id="c-handled">0</div>
+          <div class="count-lbl">handled alone</div>
+        </div>
+        <div>
+          <div class="count-num" id="c-desk" style="color:var(--signal)">0</div>
+          <div class="count-lbl">sent to you</div>
+        </div>
+        <div>
+          <div class="count-num" id="c-time" style="color:var(--ink-2)">—</div>
+          <div class="count-lbl">elapsed</div>
+        </div>
+      </div>
+
+      <div class="scroller" id="stream"></div>
+    </section>
+  </main>
+
+  <!-- BOTTOM: the autonomy dial -->
+  <footer class="dial">
+    <h2 class="dial-title">Autonomy</h2>
+    <p class="dial-note">What you've let it do alone. It asks before taking more, and some things it can never take.</p>
+    <div class="dial-chips" id="dial"></div>
+  </footer>
+
+</div>
+
+<div id="promo-root"></div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
