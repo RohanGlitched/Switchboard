@@ -136,5 +136,10 @@ async def index() -> FileResponse:
     return FileResponse(WEB / "index.html")
 
 
+@app.get("/pitch")
+async def pitch() -> FileResponse:
+    return FileResponse(WEB / "pitch.html")
+
+
 if WEB.exists():
     app.mount("/static", StaticFiles(directory=WEB), name="static")
