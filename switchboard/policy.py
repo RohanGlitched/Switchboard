@@ -135,7 +135,6 @@ def _seed() -> dict[str, DecisionClass]:
             "Logistics we may not be able to physically receive, and an ongoing "
             "relationship the Coordinator owns.",
         ),
-        # ---- The ceiling. These never move. ----
         DecisionClass(
             "minor_volunteer", "Volunteer under 18",
             "Any inquiry involving a volunteer who is a minor.",
@@ -182,7 +181,6 @@ class PolicyStore:
         self._classes = _seed()
         self._load()
 
-    # ---------- persistence ----------
     def _load(self) -> None:
         if not STORE.exists():
             return
@@ -224,7 +222,6 @@ class PolicyStore:
             self._classes = _seed()
         STORE.unlink(missing_ok=True)
 
-    # ---------- queries ----------
     def get(self, key: str) -> DecisionClass | None:
         return self._classes.get(key)
 
@@ -250,7 +247,6 @@ class PolicyStore:
                 out.append(d)
             return out
 
-    # ---------- mutation ----------
     def record_approval(self, key: str, modified: bool) -> bool:
         """Log a human verdict. Returns True if the class just became eligible
         for promotion (i.e. the agent has earned the right to ask)."""

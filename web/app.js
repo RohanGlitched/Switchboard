@@ -17,7 +17,7 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => (
   { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
 ));
 
-/* ─────────────────────────── tally ─────────────────────────── */
+/* tally */
 
 function renderTally() {
   const open = [...state.cards.values()].filter((c) => c.status === 'open').length;
@@ -42,7 +42,7 @@ function renderTally() {
   $('c-desk').textContent = state.escalated;
 }
 
-/* ─────────────────────────── decision cards ─────────────────────────── */
+/* decision cards */
 
 function cardHTML(c) {
   const never = c.tier === 'never';
@@ -124,7 +124,7 @@ function showClearState() {
   $('cards').appendChild(box);
 }
 
-/* ─────────────────────────── activity stream ─────────────────────────── */
+/* activity stream */
 
 function streamRow(msg) {
   const row = document.createElement('div');
@@ -182,7 +182,7 @@ function finishRow(mid, kind, label, detail) {
   }
 }
 
-/* ─────────────────────────── autonomy dial ─────────────────────────── */
+/* autonomy dial */
 
 function renderDial(classes) {
   state.policy = classes;
@@ -203,7 +203,7 @@ function renderDial(classes) {
   }).join('');
 }
 
-/* ─────────────────────────── promotion moment ─────────────────────────── */
+/* promotion moment */
 
 function showPromotion(p) {
   $('promo-root').innerHTML = `
@@ -227,7 +227,7 @@ async function decidePromotion(accept) {
   await post('/api/promotion', { accept });
 }
 
-/* ─────────────────────────── events ─────────────────────────── */
+/* events */
 
 function onEvent(ev) {
   switch (ev.kind) {
@@ -303,7 +303,7 @@ function nodeWord(node) {
     || 'thinking';
 }
 
-/* ─────────────────────────── wiring ─────────────────────────── */
+/* wiring */
 
 async function post(url, body) {
   const r = await fetch(url, {

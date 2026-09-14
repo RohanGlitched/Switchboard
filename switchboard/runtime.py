@@ -115,7 +115,6 @@ class Runtime:
         self.pending_promotion: dict | None = None
         self._lock = threading.RLock()
 
-    # ------------------------------------------------------------------
     def ensure_model(self):
         if self.model is None:
             self.model = make_model()
@@ -130,7 +129,6 @@ class Runtime:
         POLICY.reset()
         BUS.clear_history()
 
-    # ------------------------------------------------------------------
     async def _drainer(self, stop: asyncio.Event) -> None:
         """Pump hook events to the browser while the graph runs."""
         while not stop.is_set():
@@ -140,7 +138,6 @@ class Runtime:
         for ev in self.trace.drain():
             await BUS.publish("trace", ev)
 
-    # ------------------------------------------------------------------
     async def process_message(self, msg: InboundMessage) -> dict:
         await BUS.publish("message_in", {"message": {
             "id": msg.id, "sim_time": msg.sim_time, "sender": msg.sender,
@@ -264,7 +261,6 @@ class Runtime:
             confidence=float(data.get("confidence", 0.0) or 0.0),
         )
 
-    # ------------------------------------------------------------------
     async def run_week(self, only: list[str] | None = None) -> None:
         if self.running:
             return
@@ -300,7 +296,6 @@ class Runtime:
             "total": len(msgs), "elapsed": round(time.time() - started, 1),
         })
 
-    # ------------------------------------------------------------------
     async def resolve_card(self, card_id: str, action: str,
                            edited_reply: str | None = None) -> dict:
         with self._lock:
@@ -390,7 +385,6 @@ class Runtime:
             await BUS.publish("policy", {"classes": POLICY.snapshot()})
         return {"ok": ok}
 
-    # ------------------------------------------------------------------
     def state(self) -> dict:
         with self._lock:
             cards = [c.to_dict() for c in self.cards.values()]

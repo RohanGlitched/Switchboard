@@ -95,7 +95,6 @@ class OrgState:
             self.ledger: list[LedgerEntry] = []
             self._seq = 0
 
-    # ---------- helpers ----------
     def _next_id(self, prefix: str) -> str:
         with self._lock:
             self._seq += 1
@@ -119,7 +118,6 @@ class OrgState:
             self.ledger.append(entry)
         return entry
 
-    # ---------- mutations used by tools ----------
     def add_to_shift(self, shift_id: str, name: str) -> dict:
         with self._lock:
             shift = self.shifts.get(shift_id)
@@ -160,7 +158,6 @@ class OrgState:
             self.donations.append(d)
             return {"ok": True, "donation": d}
 
-    # ---------- views ----------
     def snapshot(self) -> dict:
         with self._lock:
             return {

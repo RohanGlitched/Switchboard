@@ -43,9 +43,6 @@ from .tools import AUTONOMOUS_TOOLS, READ_ONLY, current_class, set_classificatio
 VALID_CLASSES = [c.key for c in POLICY.all()]
 
 
-# --------------------------------------------------------------------------
-# Guardrail
-# --------------------------------------------------------------------------
 class AutonomyGuard(HookProvider):
     """Blocks write tools when the current decision class is not autonomous.
 
@@ -126,9 +123,6 @@ def _tool_name(event: Any) -> str:
     return ""
 
 
-# --------------------------------------------------------------------------
-# JSON helpers - models fence their JSON and we must not care
-# --------------------------------------------------------------------------
 def parse_json(text: str) -> dict:
     if not text:
         return {}
@@ -168,9 +162,6 @@ def node_text(state: Any, node_id: str) -> str:
     return str(getattr(nr, "result", nr))
 
 
-# --------------------------------------------------------------------------
-# Prompts
-# --------------------------------------------------------------------------
 _CLASS_MENU = "\n".join(
     f"  - {c.key}: {c.description}" for c in POLICY.all()
 )
@@ -257,9 +248,6 @@ not promise anything the handbook cannot deliver, and must make clear a human is
 coming."""
 
 
-# --------------------------------------------------------------------------
-# Graph construction
-# --------------------------------------------------------------------------
 def _agent(model, prompt: str, name: str, tools=None, hooks=None) -> Agent:
     kwargs: dict[str, Any] = {
         "system_prompt": prompt,

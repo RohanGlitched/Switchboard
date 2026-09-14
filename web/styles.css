@@ -41,7 +41,7 @@ button:focus-visible, [tabindex]:focus-visible {
   outline: 2.5px solid var(--calm); outline-offset: 2px;
 }
 
-/* ───────────────────────── shell ───────────────────────── */
+/* shell */
 
 .shell {
   display: grid;
@@ -112,7 +112,7 @@ button:focus-visible, [tabindex]:focus-visible {
 .reset:hover:not(:disabled) { border-color: var(--ink-2); color: var(--ink); }
 .reset:disabled { opacity: .4; cursor: default; }
 
-/* ───────────────────────── main split ───────────────────────── */
+/* main split */
 
 .board {
   display: grid;
@@ -177,7 +177,7 @@ button:focus-visible, [tabindex]:focus-visible {
 .scroller::-webkit-scrollbar { width: 9px; }
 .scroller::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 9px; }
 
-/* ───────────────────────── decision cards ───────────────────────── */
+/* decision cards */
 
 .card {
   background: var(--card);
@@ -320,7 +320,7 @@ button:focus-visible, [tabindex]:focus-visible {
   max-width: 44ch; line-height: 1.6;
 }
 
-/* ───────────────────────── right: the machine's work ───────────────────────── */
+/* right: the machine's work */
 
 .works { background: rgba(0,0,0,.012); }
 
@@ -375,7 +375,7 @@ button:focus-visible, [tabindex]:focus-visible {
   margin: 3px 5px 0 0; display: inline-block;
 }
 
-/* ───────────────────────── autonomy dial ───────────────────────── */
+/* autonomy dial */
 
 .dial {
   border-top: 1.5px solid var(--rule);
@@ -406,7 +406,7 @@ button:focus-visible, [tabindex]:focus-visible {
 }
 .dchip button:hover { opacity: 1; }
 
-/* ───────────────────────── promotion: the agent speaks ───────────────────────── */
+/* promotion: the agent speaks */
 
 .promo-wrap {
   position: fixed; inset: 0;
@@ -448,7 +448,7 @@ button:focus-visible, [tabindex]:focus-visible {
 .promo-acts .btn-edit { border-color: #3C4A43; color: #B8C5BE; }
 .promo-acts .btn-edit:hover { border-color: #7FB3AC; color: var(--paper); }
 
-/* ───────────────────────── responsive ───────────────────────── */
+/* responsive */
 
 @media (max-width: 1020px) {
   .shell { height: auto; }
