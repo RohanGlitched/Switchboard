@@ -1,0 +1,142 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - heading "Switchboard." [level=1] [ref=e4]
+      - generic [ref=e5]: How it works
+      - link "Open the console" [ref=e6] [cursor=pointer]:
+        - /url: https://switchboard-t7wx.onrender.com
+  - generic [ref=e8]:
+    - paragraph [ref=e9]:
+      - text: A food pantry's hardest job is
+      - emphasis [ref=e10]: the inbox
+      - text: .
+    - paragraph [ref=e11]:
+      - text: Riverside Community Pantry feeds 400 households a week with one paid Coordinator. About 150 messages land every week. Most already have an answer, written down in the handbook she wrote herself. A few do not — and she reaches those last, tired.
+      - strong [ref=e12]: Switchboard reads all of them, handles what it has been trusted with, and stops at everything else.
+    - generic [ref=e13]:
+      - generic [ref=e14]:
+        - paragraph [ref=e15]: hi are you open today? i have monday off and thought id come by
+        - generic [ref=e16]: answered alone
+      - generic [ref=e17]:
+        - paragraph [ref=e18]: my mum makes amazing chutney and jam, shes got about 40 jars she wants to donate. all home made with love
+        - generic [ref=e19]: brought to her
+      - generic [ref=e20]:
+        - paragraph [ref=e21]: Hi, I'm 14 and I really want to volunteer at the pantry — I did a food drive at school and loved it
+        - generic [ref=e22]: never automatic
+      - generic [ref=e23]:
+        - paragraph [ref=e24]: i dont know if this is the right number. we ran out of food yesterday and the baby finished the last formula this morning
+        - generic [ref=e25]: never automatic
+  - generic [ref=e27]:
+    - heading "The console has two halves, and one of them should be empty" [level=2] [ref=e28]
+    - generic [ref=e29]:
+      - generic [ref=e30]:
+        - heading "What it handled" [level=3] [ref=e31]
+        - paragraph [ref=e32]: Acted alone, on the record
+        - list [ref=e33]:
+          - listitem [ref=e34]: Searched the handbook before answering, every time
+          - listitem [ref=e35]: Booked and cancelled shifts, warning when Saturday drops below four
+          - listitem [ref=e36]: Registered households and checked the service ZIPs
+          - listitem [ref=e37]: Recorded donations and sent the reply
+          - listitem [ref=e38]: Wrote every action to a ledger the Coordinator can read back
+      - generic [ref=e39]:
+        - heading "The Desk" [level=3] [ref=e40]
+        - paragraph [ref=e41]: Stopped, because it needed a person
+        - list [ref=e42]:
+          - listitem [ref=e43]: Why it stopped — stated from policy, not guessed by the model
+          - listitem [ref=e44]: What it would do, and two or three real alternatives
+          - listitem [ref=e45]: A drafted reply, ready to send or edit
+          - listitem [ref=e46]: The handbook clauses it relied on, quoted for checking
+          - listitem [ref=e47]: Approve, edit, or take it yourself — in one click
+  - generic [ref=e49]:
+    - 'heading "The idea: autonomy is a dial, not a switch" [level=2] [ref=e50]'
+    - generic [ref=e51]:
+      - generic [ref=e52]:
+        - generic [ref=e53]: Auto
+        - paragraph [ref=e54]: It acts alone and tells you afterwards.
+        - generic [ref=e55]: Hours & location · Shift signup · Shift cancellation · Household intake · Partner referral · Shelf-stable donation
+      - generic [ref=e56]:
+        - generic [ref=e57]: Ask
+        - paragraph [ref=e58]: It researches, drafts, recommends — then stops. You decide.
+        - generic [ref=e59]: Dietary substitution · Past best-by date · Perishable donation · Home-made food · Bulk or corporate donation
+      - generic [ref=e60]:
+        - generic [ref=e61]: Never
+        - paragraph [ref=e62]: It will never act alone here, however well it performs.
+        - generic [ref=e63]: Volunteer under 18 · Severe allergy · Household in crisis · Complaint or incident · Press or public official
+    - generic [ref=e64]:
+      - generic [ref=e65]:
+        - heading "It earns the next tier" [level=3] [ref=e66]
+        - paragraph [ref=e67]: An Ask class moves to Auto only after you approve its recommendation three times without changing a word. Then it asks you for the promotion itself.
+      - generic [ref=e68]:
+        - heading "An edit resets the count to zero" [level=3] [ref=e69]
+        - paragraph [ref=e70]: "Not pauses — resets. If you had to fix the answer, it had not learned the thing yet. And no number of approvals unlocks a Never class: the promotion path does not exist, on disk or in memory."
+    - generic [ref=e71]:
+      - generic [ref=e72]: You've approved my last 3 “Routine dietary substitution” recommendations without changing a word. Want me to start handling these myself?
+      - generic [ref=e73]: Switchboard, after the third clean approval
+  - generic [ref=e75]:
+    - heading "How a message moves through it" [level=2] [ref=e76]
+    - generic [ref=e77]:
+      - img "A message enters triage, which classifies it. The Autonomy Dial routes it either to the resolver, whose tool calls pass through the guard before reaching the ledger, or to the escalator, which builds a card for the Desk. Three clean approvals at the Desk feed back to the dial as a promotion." [ref=e79]:
+        - generic [ref=e80]:
+          - generic [ref=e82]: Inbox
+          - generic [ref=e83]: 24 messages
+          - generic [ref=e85]: Triage
+          - generic [ref=e86]: reads the handbook,
+          - generic [ref=e87]: names the class
+          - generic [ref=e89]: Autonomy
+          - generic [ref=e90]: Dial
+          - generic [ref=e92]: class is Auto
+          - generic [ref=e94]: class is Ask or Never
+          - generic [ref=e96]: Resolver
+          - generic [ref=e97]: books · registers
+          - generic [ref=e98]: records · replies
+          - generic [ref=e101]: GUARD
+          - generic [ref=e103]: Ledger
+          - generic [ref=e104]: what it did
+          - generic [ref=e105]: cancels the call
+          - generic [ref=e106]: if the class is not Auto
+          - generic [ref=e108]: Escalator
+          - generic [ref=e109]: researches, drafts,
+          - generic [ref=e110]: does not act
+          - generic [ref=e112]: The Desk
+          - generic [ref=e113]: you decide
+          - generic [ref=e115]: 3 approvals, none edited → it asks to be promoted
+          - generic [ref=e117]: The ceiling
+          - generic [ref=e118]: Minors, severe allergies, crisis,
+          - generic [ref=e119]: "complaints, press: no promotion, ever."
+      - generic [ref=e121]:
+        - generic [ref=e122]: handled alone
+        - generic [ref=e124]: brought to a person
+        - generic [ref=e126]: refused outright
+        - generic [ref=e128]: Strands Graph · conditional edges evaluated in Python, not by the model
+  - generic [ref=e130]:
+    - heading "The rule is a control in the execution path, not a line in a prompt" [level=2] [ref=e131]
+    - generic [ref=e132]:
+      - generic [ref=e133]:
+        - generic [ref=e134]: "def _before_tool(self, event): name = _tool_name(event) if name in READ_ONLY: return cls = current_class() if not cls: self._cancel(event, name, \"no class established\") return if not POLICY.may_act_alone(cls): self._cancel(event, name, \"requires a human\")"
+        - paragraph [ref=e135]: A Strands BeforeToolCallEvent hook. Every write — booking, cancelling, registering, referring, recording, replying — passes through it. Ask the model nicely to send the reply anyway and the call is still cancelled, before any state changes.
+      - generic [ref=e136]:
+        - generic [ref=e137]:
+          - text: PASS guard blocked at least one write tool PASS roster was not mutated PASS nothing was written to the ledger PASS same request succeeds once the class is Auto
+          - generic [ref=e138]: 19 passed, 0 failed
+        - paragraph [ref=e139]: Same model, same message, same words. The only thing that changed between the two runs is permission.
+  - generic [ref=e141]:
+    - heading "One week, measured" [level=2] [ref=e142]
+    - generic [ref=e143]:
+      - generic [ref=e144]:
+        - generic [ref=e145]: "11"
+        - generic [ref=e146]: messages handled without her
+      - generic [ref=e147]:
+        - generic [ref=e148]: "13"
+        - generic [ref=e149]: brought to her desk, with the work already done
+      - generic [ref=e150]:
+        - generic [ref=e151]: 61s
+        - generic [ref=e152]: to read and act on the whole week
+      - generic [ref=e153]:
+        - generic [ref=e154]: 24/24
+        - generic [ref=e155]: triaged correctly against labels the agent never sees
+  - generic [ref=e157]:
+    - paragraph [ref=e158]: Nobody hands their inbox to an agent on day one. They hand over hours questions, watch for a week, and hand over one more thing.
+    - generic [ref=e159]:
+      - text: Built on the Strands Agents SDK and Amazon Bedrock — Claude Haiku 4.5, us-east-1.
+      - link "Open the console" [ref=e160] [cursor=pointer]:
+        - /url: https://switchboard-t7wx.onrender.com

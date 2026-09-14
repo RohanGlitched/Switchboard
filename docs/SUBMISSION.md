@@ -43,7 +43,7 @@ The obvious fix — "put an AI on the inbox" — is the one small nonprofits rig
 The failure mode isn't a wrong answer about opening hours. It's an agent that cheerfully
 accepts 40 jars of home-canned jam (illegal under state health code), or sends a chirpy
 auto-reply to a mother who just ran out of infant formula, or strikes up a conversation
-with a 15-year-old about volunteering. Those mistakes aren't measured in tokens.
+with a 14-year-old about volunteering. Those mistakes aren't measured in tokens.
 
 So the question we actually wanted to answer was not *"can an agent do this work?"* It
 was **"how does an agent earn the right to do this work?"**
@@ -163,6 +163,22 @@ entry — which, under concurrency, frequently belonged to somebody else's conve
 output. Instead we added the class the domain actually needs — `donation_homemade`, the
 thing the handbook forbids outright — because the taxonomy was wrong, not the model.
 
+### Accomplishments that we're proud of
+
+**The guard holds under adversarial pressure, and we can prove it in 20 seconds.** Not
+"the prompt says it shouldn't" — the tool call is cancelled at the SDK layer before any
+state changes, and the same message succeeds the moment the class is promoted.
+
+**24 out of 24 on triage**, against labels the agent never sees, including four messages
+written specifically to fool it.
+
+**An agent that asks for a raise.** The promotion prompt is the moment people lean in —
+it is the first time most viewers have seen an agent request more authority instead of
+assuming it, and refuse the request for five classes no matter how well it performs.
+
+**A full week in about 60 seconds**, four messages at a time, with every node, tool call
+and cancelled write streaming to the screen as it happens.
+
 ### What we learned
 
 Retrieval quality is not the same as retrieval usefulness. We started to reach for a
@@ -192,16 +208,28 @@ actually help.
 
 ---
 
+## Track
+
+```
+Good Neighbor Agents
+```
+
 ## Repository
 
 ```
-https://github.com/<YOUR_USERNAME>/switchboard
+https://github.com/RohanGlitched/Switchboard
 ```
 
 ## Live demo
 
 ```
-<YOUR_DEMO_URL>
+https://switchboard-t7wx.onrender.com
+```
+
+## Pitch board
+
+```
+https://switchboard-one-azure.vercel.app
 ```
 
 ## Video

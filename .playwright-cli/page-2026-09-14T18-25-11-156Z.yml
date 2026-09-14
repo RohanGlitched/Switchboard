@@ -1,0 +1,77 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - heading "Switchboard." [level=1] [ref=e4]
+    - generic [ref=e5]: Riverside Community Pantry — Coordinator's desk
+    - generic [ref=e6]:
+      - generic [ref=e7]: bedrock · anthropic.claude-haiku-4-5-20251001-v1:0
+      - button "Clear the week" [ref=e10] [cursor=pointer]
+      - button "Run the week" [ref=e11] [cursor=pointer]
+  - main [ref=e12]:
+    - generic [ref=e13]:
+      - generic [ref=e14]:
+        - heading "The Desk" [level=2] [ref=e15]
+        - paragraph [ref=e16]: Everything here stopped because it needed you.
+      - generic [ref=e17]:
+        - generic [ref=e18]: "0"
+        - generic [ref=e19]:
+          - generic [ref=e20]: Nothing needs you.
+          - generic [ref=e21]: The week hasn’t started yet.
+      - generic [ref=e23]:
+        - heading "An empty desk is the goal." [level=3] [ref=e24]
+        - paragraph [ref=e25]: Switchboard reads the pantry's inbox all week. It answers what the handbook already answers, books the shifts, records the donations — and stops at anything that needs a person's judgment. Those land here.
+    - generic [ref=e26]:
+      - generic [ref=e27]:
+        - heading "What it handled" [level=2] [ref=e28]
+        - paragraph [ref=e29]: Live, and on the record.
+      - generic [ref=e30]:
+        - generic [ref=e31]:
+          - generic [ref=e32]: "0"
+          - generic [ref=e33]: handled alone
+        - generic [ref=e34]:
+          - generic [ref=e35]: "0"
+          - generic [ref=e36]: sent to you
+        - generic [ref=e37]:
+          - generic [ref=e38]: —
+          - generic [ref=e39]: elapsed
+  - contentinfo [ref=e41]:
+    - heading "Autonomy" [level=2] [ref=e42]
+    - paragraph [ref=e43]: What you've let it do alone. It asks before taking more, and some things it can never take.
+    - generic [ref=e44]:
+      - generic "Pure handbook lookup. Wrong answers are cheap and self-correcting." [ref=e45]:
+        - text: Hours & location questions
+        - button "×" [ref=e46] [cursor=pointer]
+      - 'generic "The handbook is unambiguous: no ID, no proof, no questions. There is nothing here for a human to decide." [ref=e47]':
+        - text: New household intake
+        - button "×" [ref=e48] [cursor=pointer]
+      - generic "Table lookup against the partner list in the handbook." [ref=e49]:
+        - text: Out-of-area referral
+        - button "×" [ref=e50] [cursor=pointer]
+      - generic "Explicitly pre-authorised by handbook 4.1." [ref=e51]:
+        - text: Standard shelf-stable donation
+        - button "×" [ref=e52] [cursor=pointer]
+      - generic "Recorded automatically - but a cancellation that drops a shift below the handbook's 4-person minimum is re-routed to the Desk as a staffing risk." [ref=e53]:
+        - text: Volunteer cancellation
+        - button "×" [ref=e54] [cursor=pointer]
+      - generic "Reversible in one message, and an over-staffed shift harms nobody." [ref=e55]:
+        - text: Volunteer shift signup
+        - button "×" [ref=e56] [cursor=pointer]
+      - generic "Logistics we may not be able to physically receive, and an ongoing relationship the Coordinator owns." [ref=e57]:
+        - text: Bulk or corporate donation
+        - generic [ref=e58]: 0/3
+      - generic "The answer is always no under state health code, but it is offered with real generosity and often by someone who already gives us time and money. Refusing it badly costs more than the food is worth." [ref=e59]:
+        - text: Home-made or home-canned food
+        - generic [ref=e60]: 0/3
+      - generic "A judgment call about quality and current stock, not a safety rule." [ref=e61]:
+        - text: Past 'best by', not 'use by'
+        - generic [ref=e62]: 0/3
+      - generic "Constrained by exactly one refrigerator. Accepting what we cannot store converts a donation into landfill." [ref=e63]:
+        - text: Perishable donation
+        - generic [ref=e64]: 0/3
+      - generic "We stock all of these and the swap is routine - but it touches what a family eats, so the agent starts by asking and earns this one." [ref=e65]:
+        - text: Routine dietary substitution
+        - generic [ref=e66]: 0/3
+      - generic "Handbook 9. The agent must never apologise on the pantry's behalf or concede fault." [ref=e67]: Complaint or incident
+      - generic "A person in crisis gets a person. This is the whole point of the agent handling everything else." [ref=e68]: Household in crisis
+      - generic "Handbook 7. No volunteer - and no agent - speaks for the pantry." [ref=e69]: Press or public official
+      - generic "A substitution error here can put someone in hospital." [ref=e70]: Severe allergy or medical diet
+      - generic "Insurance and safeguarding. Handbook 3.1 makes this non-delegable, and no number of correct past answers should change that." [ref=e71]: Volunteer under 18
