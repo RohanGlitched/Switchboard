@@ -462,5 +462,12 @@ button:focus-visible, [tabindex]:focus-visible {
 @media (max-width: 620px) {
   .masthead { flex-wrap: wrap; gap: 10px; }
   .org { border-left: none; padding-left: 0; }
-  .masthead-right { width: 100%; }
+  .masthead-right { width: 100%; flex-wrap: wrap; }
+  /* The engine readout is the long element here; let it take its own row so the
+     two buttons stay on one line and keep their shape. */
+  .engine { width: 100%; order: -1; }
+  .run, .reset { white-space: nowrap; flex: 1; }
+  .panel-head { display: block; }
+  .panel-title { white-space: nowrap; }
+  .tally { flex-wrap: wrap; }
 }
