@@ -99,47 +99,15 @@ the identical request now goes through. **19 assertions, all passing.**
 
 ## Architecture
 
-```
-                         ┌──────────────────────────────┐
-  inbox message  ──────► │  TRIAGE          (Haiku 4.5)  │
-                         │  read-only: search_handbook   │
-                         │  emits strict JSON:           │
-                         │  {decision_class, urgency,    │
-                         │   summary, signals[]}         │
-                         └───────────────┬───────────────┘
-                                         │
-                            ┌────────────┴────────────┐
-             POLICY.may_act_alone(class)?              │
-                            │                          │
-                  ── yes (AUTO) ──            ── no (ASK / NEVER) ──
-                            │                          │
-                            ▼                          ▼
-          ┌─────────────────────────────┐  ┌──────────────────────────────┐
-          │ RESOLVER        (Haiku 4.5) │  │ ESCALATOR       (Haiku 4.5)  │
-          │ full toolset, writes state  │  │ read-only. Builds the        │
-          │                             │  │ Decision Desk card:          │
-          │  every tool call ▼          │  │  headline · why it stopped · │
-          │  ┌───────────────────────┐  │  │  recommendation · options ·  │
-          │  │   AutonomyGuard       │  │  │  draft reply · citations     │
-          │  │   BeforeToolCallEvent │  │  └───────────────┬──────────────┘
-          │  │   set cancel_tool if  │  │                  │
-          │  │   class is not AUTO   │  │                  ▼
-          │  └───────────────────────┘  │       ┌──────────────────────┐
-          └──────────────┬──────────────┘       │   THE DESK           │
-                         │                      │   human approves /   │
-                         ▼                      │   edits / declines   │
-               ┌──────────────────┐             └──────────┬───────────┘
-               │  LEDGER          │                        │
-               │  what it did,    │        3 clean approvals│
-               │  on the record   │                        ▼
-               └──────────────────┘             ┌──────────────────────┐
-                                                │  AUTONOMY DIAL       │
-                                                │  ASK ──► AUTO        │
-                                                │  (NEVER never moves) │
-                                                └──────────────────────┘
+![How a message moves through Switchboard](docs/architecture.png)
 
-  Every node/tool/guard event ──► EventBus ──► SSE /api/stream ──► live browser trace
-```
+**Triage** is read-only — it can search the handbook and nothing else — and emits strict
+JSON: `{decision_class, urgency, summary, signals[]}`. **Resolver** holds the full toolset
+and is the only node that writes state; every one of its tool calls passes through the
+`AutonomyGuard`. **Escalator** is read-only too, and builds the Decision Desk card:
+headline, why it stopped, recommendation, options, draft reply, citations. Every node,
+tool and guard event goes to the EventBus, out over SSE on `/api/stream`, and into the
+live browser trace.
 
 **Orchestration** is a Strands `GraphBuilder` graph with conditional edges. The edge
 condition is also the only place in the run where the decision class first exists, so it
@@ -163,6 +131,7 @@ trickling one message at a time. A full week completes in about **60 seconds**.
 | `switchboard/scenario.py` | 24 inbound messages, with ground-truth labels for evaluation only |
 | `switchboard/server.py` | FastAPI + SSE |
 | `web/` | The console. Vanilla JS/CSS, no build step. |
+| `web/pitch.html` | The pitch board at `/pitch` — the walkthrough above, as one page |
 
 ### Why the handbook search is lexical, not a vector store
 
