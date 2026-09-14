@@ -38,8 +38,8 @@
                         └────────────────┘        └──────────────────┘
 
   Model: Amazon Bedrock · us.anthropic.claude-haiku-4-5-20251001-v1:0 · us-east-1
-  Falls back to the Anthropic API, then to a deterministic replay provider,
-  so the demo cannot go dark on stage.
+  Falls back to the Anthropic API. If neither resolves, the server still starts
+  and says so in the header; /api/run returns 503 naming the variables to set.
 ```
 
 ## 2. One message, end to end
@@ -82,7 +82,7 @@ every write passes the guard:
    │    name = "book_volunteer_shift"  → not in READ_ONLY
    │    cls  = current_class()         → "" or a non-AUTO class?
    │             │                          │
-   │           yes ──► event.cancel_tool("…requires a human")   TOOL NEVER RUNS
+   │           yes ──► event.cancel_tool = "…requires a human"   TOOL NEVER RUNS
    │             no
    │             ▼
    └─ tool executes, mutates OrgState, appends a LedgerEntry

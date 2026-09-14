@@ -350,7 +350,16 @@ $('run').addEventListener('click', async () => {
   $('run').disabled = true;
   $('run').textContent = 'Working…';
   $('reset').disabled = true;
-  await post('/api/run');
+  const res = await post('/api/run');
+  if (res.detail) {
+    // Usually a missing credential. Put the reason where the person is looking.
+    state.running = false;
+    $('run').disabled = false;
+    $('run').textContent = 'Run the week';
+    $('reset').disabled = false;
+    $('engine-text').textContent = res.detail;
+    $('pulse').classList.remove('live');
+  }
 });
 
 $('reset').addEventListener('click', async () => {

@@ -6,13 +6,15 @@ as the default so a judge with a standard AWS account can clone and run, and we
 fall back cleanly when credentials are absent.
 
 Resolution order for SWITCHBOARD_PROVIDER=auto (the default):
-    1. bedrock   - if boto3 can resolve credentials
+    1. bedrock   - if boto3 can resolve credentials, or a Bedrock API key is set
     2. anthropic - if ANTHROPIC_API_KEY is set
-    3. replay    - deterministic cached transcripts, no network, always works
+    3. none      - no model could be resolved
 
-`replay` is not a toy. A live demo that depends on a model endpoint is a demo
-that can fail in front of judges, so every agent turn is recorded on first run
-and can be replayed byte-for-byte offline.
+Resolution never raises. A missing credential must not stop the server from
+starting: the console still loads, the header says plainly which provider is in
+play, and /api/run returns a 503 naming the environment variables to set. A
+blank page teaches you nothing; a running page that tells you what is missing
+teaches you everything.
 """
 
 from __future__ import annotations
@@ -41,7 +43,7 @@ class ProviderInfo:
 
     @property
     def is_live(self) -> bool:
-        return self.name != "replay"
+        return self.name != "none"
 
 
 def _bedrock_credentials_available() -> bool:
@@ -84,11 +86,16 @@ def resolve_provider() -> ProviderInfo:
     if requested in ("anthropic", "auto") and os.getenv("ANTHROPIC_API_KEY"):
         return ProviderInfo("anthropic", ANTHROPIC_FAST, "Anthropic API")
 
-    return ProviderInfo("replay", "recorded", "Deterministic replay (no model calls)")
+    return ProviderInfo(
+        "none",
+        "unconfigured",
+        "No model credentials found - set AWS_BEARER_TOKEN_BEDROCK, "
+        "AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY, or ANTHROPIC_API_KEY",
+    )
 
 
 def build_model(provider: ProviderInfo):
-    """Return a Strands model instance, or None for replay mode."""
+    """Return a Strands model instance, or None if nothing could be resolved."""
     if provider.name == "bedrock":
         from strands.models import BedrockModel
 

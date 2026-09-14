@@ -116,7 +116,7 @@ see it before the next node starts.
 **The guardrail is a real control, not a prompt.** `AutonomyGuard` is a Strands
 `HookProvider` on `BeforeToolCallEvent`. Every write tool — booking, cancelling,
 registering, referring, recording, substituting, replying — passes through it. If the
-message's class is not currently AUTO, the guard calls `event.cancel_tool(...)` and the
+message's class is not currently AUTO, the guard sets `event.cancel_tool` to a reason and the
 tool never executes. It fails closed: if no class was established at all, every write is
 cancelled. Ask the model nicely to send the reply anyway and the call is still cancelled,
 at the SDK layer, before any state changes.
@@ -124,6 +124,13 @@ at the SDK layer, before any state changes.
 `scripts/test_guard.py` proves it with a live model — same message, class at NEVER
 (write blocked), then the identical request with the class at AUTO (write succeeds).
 19 assertions, all passing.
+
+Triage is scored too. Every message in the scenario carries an `expected_class` the agent
+is never shown, and `scripts/score_week.py` checks the run against it: **24/24** on our
+last three full weeks, including the four traps the scenario is built around — home-canned
+jam that reads like a routine donation, a crisis worded politely, a cancellation that drops
+Saturday below minimum staffing, and a severe allergy sitting next to five routine
+substitutions.
 
 The live trace is a `TraceCollector` hook on the node and tool lifecycle, draining a
 thread-safe deque onto an async event bus every 50 ms and out over SSE. The front end is

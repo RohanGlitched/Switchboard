@@ -66,29 +66,49 @@ class AutonomyGuard(HookProvider):
         decision_class = current_class()
         if not decision_class:
             # We could not establish what this is. Refuse to write anything.
-            try:
-                event.cancel_tool = (  # type: ignore[attr-defined]
-                    "BLOCKED: no decision class established for this message. "
-                    "Hand this to the Coordinator."
-                )
-            except Exception:  # noqa: BLE001
-                pass
+            self._cancel(
+                event,
+                name,
+                "BLOCKED: no decision class established for this message. "
+                "Hand this to the Coordinator.",
+            )
             return
         if POLICY.may_act_alone(decision_class):
             return
         tier = POLICY.tier_of(decision_class)
-        reason = (
+        self.blocked.append(f"{name} ({decision_class})")
+        self._cancel(
+            event,
+            name,
             f"BLOCKED by Autonomy Dial: '{decision_class}' is at tier '{tier.value}'. "
             f"You may not call '{name}' yourself. Summarise the situation and your "
-            f"recommendation for the Coordinator instead."
+            f"recommendation for the Coordinator instead.",
         )
-        self.blocked.append(f"{name} ({decision_class})")
-        # Strands exposes cancellation via cancel_tool; tolerate API drift rather
-        # than crash a demo over an attribute name.
+
+    @staticmethod
+    def _cancel(event: Any, tool_name: str, reason: str) -> None:
+        """Stop the tool, or fail loudly.
+
+        Strands cancels a pending tool call by assignment to `event.cancel_tool`.
+        If a future version renames that, the assignment could silently land on a
+        dead attribute and the write would go through unguarded - which is the one
+        outcome this whole system exists to prevent. So we assign, read it back,
+        and raise if it did not take. A crashed run is recoverable; a permission
+        check that quietly stopped working is not.
+        """
         try:
             event.cancel_tool = reason  # type: ignore[attr-defined]
-        except Exception:  # noqa: BLE001
-            pass
+            took = getattr(event, "cancel_tool", None)
+        except Exception as exc:  # noqa: BLE001
+            raise RuntimeError(
+                f"AutonomyGuard could not cancel '{tool_name}': {exc}"
+            ) from exc
+        if took != reason:
+            raise RuntimeError(
+                f"AutonomyGuard could not cancel '{tool_name}': setting "
+                "BeforeToolCallEvent.cancel_tool had no effect. The Strands hook "
+                "API has changed and the guard is not enforcing anything."
+            )
 
 
 def _tool_name(event: Any) -> str:

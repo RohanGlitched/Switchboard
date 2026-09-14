@@ -85,7 +85,7 @@ capability you ship; it is a relationship you build, incrementally, with a ceili
 `AutonomyGuard` is a Strands `HookProvider` on `BeforeToolCallEvent`. Every write tool —
 booking, cancelling, registering, referring, recording, substituting, replying — passes
 through it. If the message's decision class is not currently AUTO, the guard calls
-`event.cancel_tool(...)` and the tool never executes. It also fails closed: if no class
+`event.cancel_tool = <reason>` and the tool never executes. It also fails closed: if no class
 was established at all, every write is cancelled.
 
 The model is never trusted to police itself. Ask it nicely to send the reply anyway and
@@ -122,7 +122,7 @@ the identical request now goes through. **19 assertions, all passing.**
           │  ┌───────────────────────┐  │  │  recommendation · options ·  │
           │  │   AutonomyGuard       │  │  │  draft reply · citations     │
           │  │   BeforeToolCallEvent │  │  └───────────────┬──────────────┘
-          │  │   cancel_tool() if    │  │                  │
+          │  │   set cancel_tool if  │  │                  │
           │  │   class is not AUTO   │  │                  ▼
           │  └───────────────────────┘  │       ┌──────────────────────┐
           └──────────────┬──────────────┘       │   THE DESK           │
@@ -219,11 +219,19 @@ Open the page and press **Run the week**.
 ```bash
 .venv/bin/python scripts/test_guard.py   # 19 assertions: policy + live guard enforcement
 .venv/bin/python scripts/smoke.py        # end-to-end over a 6-message slice
+.venv/bin/python scripts/score_week.py   # triage accuracy, after a full run
 ```
 
 `test_guard.py` covers the offline policy invariants (unknown classes fail closed to ASK;
 a hand-edited policy file cannot promote a NEVER class; an edit resets the approval
 counter) and then runs the live model twice to prove the guard actually cancels a write.
+
+`score_week.py` checks triage against the `expected_class` ground truth carried by every
+message in `scenario.py` — a label the agent is never shown. On our last three full runs
+it scored **24/24**, including the four traps the scenario is built around: home-canned
+jam that reads like a routine donation, a crisis worded politely, a cancellation that
+drops Saturday below minimum staffing, and a severe allergy sitting next to five routine
+substitutions.
 
 ---
 
@@ -236,6 +244,15 @@ counter) and then runs the live model twice to prove the guard actually cancels 
 - **Shared dials.** A pantry network could publish a recommended starting dial —
   including the NEVER floor — so a new org inherits five years of someone else's hard
   lessons on day one.
+
+## Also in this repo
+
+| | |
+|---|---|
+| [`docs/architecture.md`](docs/architecture.md) | Full architecture: message lifecycle, the guard path, the dial's state machine |
+| [`docs/BLOG_POST.md`](docs/BLOG_POST.md) | *Agents for Humans: teaching an agent to earn autonomy, one decision at a time* |
+| [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md) | Demo narration, shot list, and what to do if a take goes wrong |
+| [`docs/SUBMISSION.md`](docs/SUBMISSION.md) | The Devpost write-up |
 
 ## License
 

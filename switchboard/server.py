@@ -88,6 +88,9 @@ async def stream() -> StreamingResponse:
 async def run_week() -> dict:
     if RUNTIME.running:
         raise HTTPException(409, "already running")
+    if not PROVIDER.is_live:
+        # Say what is missing rather than failing somewhere deep in the graph.
+        raise HTTPException(503, PROVIDER.detail)
     asyncio.create_task(RUNTIME.run_week())
     return {"ok": True, "started": True}
 

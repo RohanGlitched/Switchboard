@@ -158,7 +158,7 @@ apart. On the third, the dark panel rises.
 | A message errors mid-run | Keep going. Say "one failed — it went to her desk, which is the right failure." It is a genuinely good moment. |
 | Promotion doesn't fire | You edited a card instead of approving it, or the run was already dirty. `POST /api/reset`, re-run, approve cleanly. |
 | Run is slower than 64s | Fine. Trim in the edit, not on the take. |
-| `provider` shows `replay` | Credentials aren't in the server's environment. Restart with the env sourced — see README. |
+| Header shows "No model credentials found" | Credentials aren't in the *server's* environment. Stop it, source them, restart — see README. |
 
 ## Recording checklist
 
