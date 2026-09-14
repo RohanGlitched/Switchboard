@@ -6,8 +6,8 @@ const $ = (id) => document.getElementById(id);
 const state = {
   cards: new Map(),      // card_id -> card
   rows: new Map(),       // message_id -> DOM row
-  handled: 0,
-  escalated: 0,
+  handled: new Set(),    // message_id — a set, so a replayed event cannot count twice
+  escalated: new Set(),
   policy: [],
   started: null,
   running: false,
@@ -28,18 +28,20 @@ function renderTally() {
   num.textContent = open;
   num.classList.toggle('zero', open === 0);
 
+  const handled = state.handled.size;
+
   if (open === 0) {
-    word.textContent = state.handled ? 'You’re clear.' : 'Nothing needs you.';
-    sub.textContent = state.handled
-      ? `${state.handled} handled without you this week.`
+    word.textContent = handled ? 'You’re clear.' : 'Nothing needs you.';
+    sub.textContent = handled
+      ? `${handled} handled without you this week.`
       : 'The week hasn’t started yet.';
   } else {
     word.textContent = open === 1 ? 'One decision needs you.' : `${open} decisions need you.`;
-    sub.textContent = `${state.handled} others were handled without you.`;
+    sub.textContent = `${handled} others were handled without you.`;
   }
 
-  $('c-handled').textContent = state.handled;
-  $('c-desk').textContent = state.escalated;
+  $('c-handled').textContent = handled;
+  $('c-desk').textContent = state.escalated.size;
 }
 
 /* decision cards */
@@ -119,7 +121,7 @@ function showClearState() {
   box.className = 'empty';
   box.innerHTML = `
     <h3>Desk clear.</h3>
-    <p>${state.handled} messages handled without you, ${state.escalated} brought to you.
+    <p>${state.handled.size} messages handled without you, ${state.escalated.size} brought to you.
        Everything it did is on the record on the right.</p>`;
   $('cards').appendChild(box);
 }
@@ -256,16 +258,22 @@ function onEvent(ev) {
       break;
 
     case 'handled':
-      state.handled += 1;
+      state.handled.add(ev.message_id);
       finishRow(ev.message_id, 'handled',
         `Handled alone — ${ev.class_label.toLowerCase()}`, ev.reply);
       renderTally();
       break;
 
     case 'escalated':
-      state.escalated += 1;
+      state.escalated.add(ev.card.message_id);
       upsertCard(ev.card);
       finishRow(ev.card.message_id, 'escalated', 'Sent to your desk');
+      break;
+
+    case 'week_reset':
+      // Someone cleared the week in another tab. This one is now showing a
+      // week that no longer exists on the server.
+      if (!ev.replay) location.reload();
       break;
 
     case 'message_failed':

@@ -100,6 +100,8 @@ async def reset() -> dict:
     if RUNTIME.running:
         raise HTTPException(409, "cannot reset while running")
     RUNTIME.reset()
+    # Tell every other open tab, or they keep counting a week that is gone.
+    await BUS.publish("week_reset", {})
     return {"ok": True}
 
 
