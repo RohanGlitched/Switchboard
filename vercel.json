@@ -1,0 +1,8 @@
+{
+  "framework": null,
+  "installCommand": "echo no install step",
+  "buildCommand": "CONSOLE_URL=${CONSOLE_URL:-/}; mkdir -p out; sed \"s|href=\\\"/\\\"|href=\\\"$CONSOLE_URL\\\"|g\" web/pitch.html > out/index.html",
+  "outputDirectory": "out",
+  "cleanUrls": true,
+  "trailingSlash": false
+}

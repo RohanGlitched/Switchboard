@@ -5,3 +5,7 @@ __pycache__/
 sb-*.png
 switchboard/_policy_store.json
 .DS_Store
+out/
+.vercel/
+.vercel
+.env*
